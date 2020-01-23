@@ -5,6 +5,53 @@ const int MAX_DATA_STACK_HEIGHT = 23;
 const int MAX_COD_LENGTH = 500;
 const int MAX_LEXI_LEVELS = 3;
 
+typedef struct command
+{
+    int op;
+    int l;
+    int m;
+} command;
+
+command** fillCommandStack(char* filename)
+{
+    FILE* inputFile;
+    int op, l, m, i = 0;
+
+    if (filename == NULL)
+        return NULL;
+
+    inputFile = fopen(filename, "r");
+
+    if (inputFile == NULL)
+        return NULL;
+
+    command** commandsArray = calloc(MAX_CODE_LENGTH, sizeof(command*));
+
+    while (fscanf(inputFile, "%d %d %d", &op, &l, &m) != EOF)
+    {
+        commandsArray[i] = malloc(sizeof(command*));
+        commandsArray[i]->op = op;
+        commandsArray[i]->l = l;
+        commandsArray[i]->m = m;
+        i++;
+    }
+
+    return commandsArray;
+}
+
+void printCommands(command** commandsArray)
+{
+    int i;
+
+    for(i = 0; i < MAX_CODE_LENGTH; i++)
+        if (commandsArray[i] == NULL)
+            break;
+        else printf("%p --> %d %d %d\n", commandsArray[i], commandsArray[i]->op, commandsArray[i]->l, commandsArray[i]->m);
+
+    return;
+}
+
+
 void printStack(int* data_stack)
 {
 	int i = 0;
