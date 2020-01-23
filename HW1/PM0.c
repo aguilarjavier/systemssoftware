@@ -2,7 +2,7 @@
 #include<stdlib.h>
 
 const int MAX_DATA_STACK_HEIGHT = 23;
-const int MAX_COD_LENGTH = 500;
+const int MAX_CODE_LENGTH = 500;
 const int MAX_LEXI_LEVELS = 3;
 
 typedef struct command
